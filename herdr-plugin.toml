@@ -1,0 +1,21 @@
+id = "ray.file-explorer"
+name = "File Explorer"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Open Yazi (terminal file manager) in a herdr pane"
+platforms = ["macos"]
+
+[[build]]
+command = ["bash", "-c", "command -v yazi >/dev/null 2>&1 || brew install yazi"]
+
+[[panes]]
+id = "explorer"
+title = "Explorer"
+placement = "split"
+command = ["bash", "-c", "exec yazi"]
+
+[[actions]]
+id = "open"
+title = "Open file explorer"
+contexts = ["workspace"]
+command = ["bash", "-c", "DIR=\"$(bash \"$HERDR_PLUGIN_ROOT/bin/resolve-dir.sh\")\"; exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin ray.file-explorer --entrypoint explorer --placement split --cwd \"$DIR\""]
