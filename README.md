@@ -4,6 +4,8 @@
 ![platform: macOS](https://img.shields.io/badge/platform-macOS-informational)
 ![zero JS dependencies](https://img.shields.io/badge/deps-zero-brightgreen)
 
+![herdr-yazi open in a split pane beside Claude Code, showing the Yazi file explorer on the right](assets/hero.png)
+
 🇰🇷 한국어 | [🇺🇸 English](#english)
 
 **[Yazi](https://yazi-rs.github.io/)를 [herdr](https://herdr.dev) pane 안에서 바로 띄워주는 얇은 래퍼 플러그인.** 파일 탐색·미리보기·파일 조작 전부 Yazi 본체가 그대로 처리한다 — 이 플러그인은 "지금 작업 중인 디렉토리를 정확히 찾아서 Yazi를 그 자리에 여는 것"만 책임진다.
