@@ -19,3 +19,9 @@ id = "open"
 title = "Open file explorer"
 contexts = ["workspace"]
 command = ["bash", "-c", "DIR=\"$(bash \"$HERDR_PLUGIN_ROOT/bin/resolve-dir.sh\")\"; exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin ray.file-explorer --entrypoint explorer --placement split --cwd \"$DIR\""]
+
+[[actions]]
+id = "open-tab"
+title = "Open file explorer (new tab)"
+contexts = ["workspace"]
+command = ["bash", "-c", "DIR=\"$(bash \"$HERDR_PLUGIN_ROOT/bin/resolve-dir.sh\")\"; exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin ray.file-explorer --entrypoint explorer --placement tab --cwd \"$DIR\""]

@@ -18,7 +18,8 @@
 ## 무엇을 하는가
 
 - `[[build]]`: 설치 시 `command -v yazi`로 확인 후 없으면 `brew install yazi` 실행.
-- `[[actions]] open`: 트리거된 pane/워크스페이스의 디렉토리를 `$HERDR_PLUGIN_CONTEXT_JSON`에서 읽어 `herdr plugin pane open --cwd`로 새 pane을 연다.
+- `[[actions]] open`: 트리거된 pane/워크스페이스의 디렉토리를 `$HERDR_PLUGIN_CONTEXT_JSON`에서 읽어 `herdr plugin pane open --placement split --cwd`로 split pane을 연다.
+- `[[actions]] open-tab`: 위와 동일하지만 `--placement tab`으로 새 탭에 연다.
 - `[[panes]] explorer`: 그 pane 안에서 `exec yazi` — 그게 전부다.
 
 디렉토리 해석 우선순위: `$HERDR_EXPLORER_DIR` → `HERDR_PLUGIN_CONTEXT_JSON`의 `focused_pane_cwd`/`workspace_cwd` → 현재 디렉토리.
@@ -33,14 +34,20 @@ herdr plugin install speardragon/herdr-yazi
 herdr 설정(`~/.config/herdr/config.toml`)에 키바인딩 추가:
 
 ```toml
-[[keys.command]]
-key = "prefix+o"
+[[keys.command]]              # split pane으로 열기
+key = "prefix+y"
 type = "plugin_action"
 command = "ray.file-explorer.open"
 description = "open file explorer"
+
+[[keys.command]]              # 새 탭으로 열기
+key = "prefix+Y"
+type = "plugin_action"
+command = "ray.file-explorer.open-tab"
+description = "open file explorer in a new tab"
 ```
 
-`herdr server reload-config` 실행 후 키를 누르면 끝.
+`herdr server reload-config` 실행 후 키를 누르면 끝. `prefix+y`는 split, `prefix+Y`(Shift+y)는 새 탭.
 
 ## 키
 
@@ -83,7 +90,8 @@ macOS + [Homebrew](https://brew.sh/).
 ### What it does
 
 - `[[build]]`: checks `command -v yazi`, runs `brew install yazi` if missing.
-- `[[actions]] open`: reads the triggering pane/workspace's directory from `$HERDR_PLUGIN_CONTEXT_JSON` and opens a new pane via `herdr plugin pane open --cwd`.
+- `[[actions]] open`: reads the triggering pane/workspace's directory from `$HERDR_PLUGIN_CONTEXT_JSON` and opens a split pane via `herdr plugin pane open --placement split --cwd`.
+- `[[actions]] open-tab`: same, but with `--placement tab` to open in a new tab instead.
 - `[[panes]] explorer`: `exec yazi` inside that pane. That's the whole plugin.
 
 Directory resolution order: `$HERDR_EXPLORER_DIR` → `HERDR_PLUGIN_CONTEXT_JSON`'s `focused_pane_cwd`/`workspace_cwd` → current directory.
@@ -98,14 +106,20 @@ herdr plugin install speardragon/herdr-yazi
 Add a keybinding in your herdr config (`~/.config/herdr/config.toml`):
 
 ```toml
-[[keys.command]]
-key = "prefix+o"
+[[keys.command]]              # open in a split pane
+key = "prefix+y"
 type = "plugin_action"
 command = "ray.file-explorer.open"
 description = "open file explorer"
+
+[[keys.command]]              # open in a new tab
+key = "prefix+Y"
+type = "plugin_action"
+command = "ray.file-explorer.open-tab"
+description = "open file explorer in a new tab"
 ```
 
-Run `herdr server reload-config`, then press the key.
+Run `herdr server reload-config`, then press the key. `prefix+y` opens a split, `prefix+Y` (Shift+y) opens a new tab.
 
 ### Keys
 
