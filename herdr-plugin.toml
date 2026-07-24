@@ -3,10 +3,10 @@ name = "File Explorer"
 version = "0.1.0"
 min_herdr_version = "0.7.0"
 description = "Open Yazi (terminal file manager) in a herdr pane"
-platforms = ["macos"]
+platforms = ["linux", "macos"]
 
 [[build]]
-command = ["bash", "-c", "command -v yazi >/dev/null 2>&1 || brew install yazi"]
+command = ["bash", "-c", "command -v yazi >/dev/null 2>&1 || { [ \"$(uname -s)\" = \"Darwin\" ] && command -v brew >/dev/null 2>&1 && exec brew install yazi; echo \"Yazi is required. Install it from https://yazi-rs.github.io/docs/installation\" >&2; exit 1; }"]
 
 [[panes]]
 id = "explorer"
