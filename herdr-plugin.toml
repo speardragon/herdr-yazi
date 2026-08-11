@@ -3,25 +3,67 @@ name = "File Explorer"
 version = "0.1.0"
 min_herdr_version = "0.7.0"
 description = "Open Yazi (terminal file manager) in a herdr pane"
-platforms = ["macos"]
+platforms = ["macos", "linux", "windows"]
 
+# Unix build: install yazi via Homebrew
 [[build]]
+platforms = ["macos", "linux"]
 command = ["bash", "-c", "command -v yazi >/dev/null 2>&1 || brew install yazi"]
 
+# Windows build: check for yazi, error with install options if missing
+[[build]]
+platforms = ["windows"]
+command = ["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/check-yazi.ps1"]
+
+# Cross-platform pane - herdr spawns relative command (works on Unix AND Windows now)
 [[panes]]
 id = "explorer"
 title = "Explorer"
+platforms = ["macos", "linux", "windows"]
 placement = "split"
-command = ["bash", "-c", "exec yazi"]
+command = ["yazi"]
 
+# Unix startup (no-op for native approach)
+[[startup]]
+platforms = ["macos", "linux"]
+command = ["bin/startup"]
+
+# Windows startup - event-driven one-shot via event hooks
+[[startup]]
+platforms = ["windows"]
+command = ["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "bin/startup.ps1"]
+
+# Cross-platform actions - use native plugin pane open (works on all platforms v0.8.0+)
+# Version detection & fallback handled in Windows scripts
 [[actions]]
 id = "open"
 title = "Open file explorer"
-contexts = ["workspace"]
+description = "Open Yazi in a split pane"
+platforms = ["macos", "linux", "windows"]
+contexts = ["global", "workspace", "tab"]
 command = ["bash", "-c", "DIR=\"$(bash \"$HERDR_PLUGIN_ROOT/bin/resolve-dir.sh\")\"; exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin ray.file-explorer --entrypoint explorer --placement split --cwd \"$DIR\""]
 
 [[actions]]
 id = "open-tab"
-title = "Open file explorer (new tab)"
-contexts = ["workspace"]
+title = "Open file explorer in new tab"
+description = "Open Yazi in a new tab"
+platforms = ["macos", "linux", "windows"]
+contexts = ["global", "workspace", "tab"]
 command = ["bash", "-c", "DIR=\"$(bash \"$HERDR_PLUGIN_ROOT/bin/resolve-dir.sh\")\"; exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin ray.file-explorer --entrypoint explorer --placement tab --cwd \"$DIR\""]
+
+# Windows-specific actions with version detection & fallback
+[[actions]]
+id = "open-windows"
+title = "Open file explorer"
+description = "Open Yazi in a split pane (Windows)"
+platforms = ["windows"]
+contexts = ["global", "workspace", "tab"]
+command = ["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/open-yazi-windows.ps1"]
+
+[[actions]]
+id = "open-tab-windows"
+title = "Open file explorer in new tab"
+description = "Open Yazi in a new tab (Windows)"
+platforms = ["windows"]
+contexts = ["global", "workspace", "tab"]
+command = ["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/open-yazi-tab-windows.ps1"]
