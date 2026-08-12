@@ -1,6 +1,6 @@
 id = "ray.file-explorer"
 name = "Yazi Explorer"
-version = "0.1.0"
+version = "1.0.0"
 min_herdr_version = "0.7.0"
 description = "Open Yazi (terminal file manager) in a herdr pane"
 platforms = ["macos"]
