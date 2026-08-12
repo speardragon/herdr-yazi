@@ -4,7 +4,7 @@
 ![platform: macOS](https://img.shields.io/badge/platform-macOS-informational)
 ![zero JS dependencies](https://img.shields.io/badge/deps-zero-brightgreen)
 
-![herdr-yazi open in a split pane beside Claude Code, showing the Yazi file explorer on the right](assets/hero.png)
+![herdr-yazi open in a split pane beside Claude Code, showing the Yazi file explorer on the right](assets/hero.jpeg)
 
 [🇰🇷 한국어](README.ko.md) | 🇺🇸 English
 
