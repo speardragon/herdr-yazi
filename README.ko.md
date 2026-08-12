@@ -51,6 +51,28 @@ description = "open file explorer in a new tab"
 
 `herdr server reload-config` 실행 후 키를 누르면 끝. `prefix+y`는 split, `prefix+Y`(Shift+y)는 새 탭.
 
+### 참고: Command Center로 등록하기
+
+낱개 `prefix+<key>` 대신 [Command Center](https://github.com/speardragon/herdr-command-center)를 쓰고 있다면, herdr-yazi의 액션도 거기에 등록해서 같은 팝업에서 실행할 수 있다.
+
+`commands.toml`에 추가한다 (`herdr plugin action invoke edit-config --plugin cdragon.command-center`로 열기):
+
+```toml
+[[commands]]
+slot = "f"
+label = "File explorer"
+type = "plugin_action"
+command = "ray.file-explorer.open"
+
+[[commands]]
+slot = "t"
+label = "File explorer (new tab)"
+type = "plugin_action"
+command = "ray.file-explorer.open-tab"
+```
+
+위의 `[[keys.command]]` 방식도 그대로 잘 동작한다 — 별도 키를 더 쓰고 싶지 않을 때 고를 수 있는 선택지일 뿐이다.
+
 ## 키
 
 이 플러그인은 자체 키를 정의하지 않는다 — pane 안에서 실행되는 건 순수 Yazi이므로, 모든 키는 [Yazi 공식 키바인딩 문서](https://yazi-rs.github.io/docs/keymap)를 따른다.

@@ -51,6 +51,28 @@ description = "open file explorer in a new tab"
 
 Run `herdr server reload-config`, then press the key. `prefix+y` opens a split, `prefix+Y` (Shift+y) opens a new tab.
 
+### Alternative: register it in Command Center
+
+Already using [Command Center](https://github.com/speardragon/herdr-command-center) instead of loose `prefix+<key>` bindings? You can register herdr-yazi's actions there too, so they show up in the same popup as everything else.
+
+Add to your `commands.toml` (open it with `herdr plugin action invoke edit-config --plugin cdragon.command-center`):
+
+```toml
+[[commands]]
+slot = "f"
+label = "File explorer"
+type = "plugin_action"
+command = "ray.file-explorer.open"
+
+[[commands]]
+slot = "t"
+label = "File explorer (new tab)"
+type = "plugin_action"
+command = "ray.file-explorer.open-tab"
+```
+
+The `[[keys.command]]` setup above still works fine on its own — this is just an option if you'd rather not add another dedicated key.
+
 ## Keys
 
 This plugin defines no keys of its own — the pane runs plain Yazi, so every keybinding is [Yazi's own](https://yazi-rs.github.io/docs/keymap).
