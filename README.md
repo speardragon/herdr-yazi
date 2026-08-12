@@ -93,3 +93,25 @@ HERDR_PLUGIN_CONTEXT_JSON='{"focused_pane_cwd":"/some/dir"}' bin/resolve-dir.sh
 ## Requirements
 
 macOS + [Homebrew](https://brew.sh/).
+
+---
+
+## More herdr plugins
+
+**[Command Center](https://github.com/speardragon/herdr-command-center)** — tired of trying to remember which `prefix+<key>` does what as you install more plugins? One keybinding opens a popup listing everything you've registered; press the slot key next to it and it runs immediately. No more digging through `config.toml` to recall a binding you set up three plugins ago.
+
+![The Command Center popup listing commands in a grid, each with its own slot key](https://raw.githubusercontent.com/speardragon/herdr-command-center/main/docs/popup-list.png)
+
+```bash
+herdr plugin install speardragon/herdr-command-center --yes
+```
+
+**[Plugin Manager](https://github.com/speardragon/herdr-plugin-manager)** — installing, updating, and removing herdr plugins by hand means memorizing `herdr plugin ...` incantations in a spare pane every time. Want to see what has an update waiting, toggle plugins on and off, and browse what the community has built — all from one popup? This does exactly that.
+
+| ![main view — installed plugin list](https://raw.githubusercontent.com/speardragon/herdr-plugin-manager/main/assets/main.png) | ![marketplace view — community plugins sorted by stars](https://raw.githubusercontent.com/speardragon/herdr-plugin-manager/main/assets/market.png) |
+| :---: | :---: |
+| Main view | Marketplace view |
+
+```bash
+herdr plugin install speardragon/herdr-plugin-manager --yes
+```

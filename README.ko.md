@@ -93,3 +93,25 @@ HERDR_PLUGIN_CONTEXT_JSON='{"focused_pane_cwd":"/some/dir"}' bin/resolve-dir.sh
 ## 요구 사항
 
 macOS + [Homebrew](https://brew.sh/).
+
+---
+
+## 이런 플러그인도 만들었습니다
+
+**[Command Center](https://github.com/speardragon/herdr-command-center)** — 플러그인을 하나둘 늘려가다 보니 어떤 `prefix+<key>`가 뭘 하는 건지 헷갈리기 시작하지 않으셨나요? 키 하나로 팝업을 열면 등록해둔 명령이 전부 뜨고, 옆에 붙은 슬롯 키만 누르면 바로 실행됩니다. 세 플러그인 전에 정해둔 바인딩을 `config.toml`에서 다시 뒤질 필요가 없어집니다.
+
+![The Command Center popup listing commands in a grid, each with its own slot key](https://raw.githubusercontent.com/speardragon/herdr-command-center/main/docs/popup-list.png)
+
+```bash
+herdr plugin install speardragon/herdr-command-center --yes
+```
+
+**[Plugin Manager](https://github.com/speardragon/herdr-plugin-manager)** — 플러그인을 설치·업데이트·삭제할 때마다 `herdr plugin ...` 명령어를 외워서 빈 pane에 치는 게 번거롭지 않으신가요? 이걸 사용하면 어떤 플러그인에 업데이트가 있는지 한눈에 보고, 켜고 끄고, 커뮤니티가 만든 플러그인까지 팝업 하나에서 둘러보고 설치할 수 있습니다.
+
+| ![main view — installed plugin list](https://raw.githubusercontent.com/speardragon/herdr-plugin-manager/main/assets/main.png) | ![marketplace view — community plugins sorted by stars](https://raw.githubusercontent.com/speardragon/herdr-plugin-manager/main/assets/market.png) |
+| :---: | :---: |
+| 메인 모습 | 마켓플레이스 모습 |
+
+```bash
+herdr plugin install speardragon/herdr-plugin-manager --yes
+```
