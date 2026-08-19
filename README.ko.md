@@ -1,7 +1,7 @@
 # herdr-yazi
 
 ![herdr 0.7+](https://img.shields.io/badge/herdr-0.7%2B-8a2be2)
-![platform: macOS](https://img.shields.io/badge/platform-macOS-informational)
+![platform: macOS | Linux](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-informational)
 ![zero JS dependencies](https://img.shields.io/badge/deps-zero-brightgreen)
 
 ![herdr-yazi open in a split pane beside Claude Code, showing the Yazi file explorer on the right](assets/hero.jpeg)
@@ -14,12 +14,12 @@
 
 - **VSCode로 안 넘어가도 됨.** 터미널(herdr) 세션을 벗어나지 않고 파일을 훑어보고 내용을 미리 볼 수 있다.
 - **Yazi를 재구현하지 않는다.** 트리 탐색, 이미지/텍스트 프리뷰, 파일 조작 — 전부 실제 Yazi 바이너리가 하는 일이고, 이 플러그인은 그걸 herdr pane 안에 배치만 한다. 기능이 부족하면 Yazi 자체를 업데이트하면 된다.
-- **설치가 곧 준비 끝.** 플러그인을 설치하면 `[[build]]` 단계에서 Homebrew로 Yazi를 자동 설치한다. 이미 있으면 건너뛴다.
+- **설치가 곧 준비 끝.** macOS에서는 플러그인의 `[[build]]` 단계가 Homebrew로 Yazi를 자동 설치한다. Linux에서는 Yazi가 이미 설치되어 있어야 한다.
 - **어디서 열든 그 자리에서 뜬다.** 키를 누른 pane의 워크스페이스 디렉토리를 herdr 컨텍스트에서 읽어 `--cwd`로 넘기기 때문에, 항상 "지금 작업 중이던 그 폴더"에서 Yazi가 열린다.
 
 ## 무엇을 하는가
 
-- `[[build]]`: 설치 시 `command -v yazi`로 확인 후 없으면 `brew install yazi` 실행.
+- `[[build]]`: `command -v yazi`로 확인하고, macOS에서만 Yazi가 없으면 `brew install yazi`를 실행한다. Linux에서는 설치 안내와 함께 종료한다.
 - `[[actions]] open`: 트리거된 pane/워크스페이스의 디렉토리를 `$HERDR_PLUGIN_CONTEXT_JSON`에서 읽어 `herdr plugin pane open --placement split --cwd`로 split pane을 연다.
 - `[[actions]] open-tab`: 위와 동일하지만 `--placement tab`으로 새 탭에 연다.
 - `[[panes]] explorer`: 그 pane 안에서 `exec yazi` — 그게 전부다.
@@ -29,7 +29,7 @@
 ## 빠른 시작
 
 ```bash
-# 1. 설치 (Yazi가 없으면 Homebrew로 자동 설치됨)
+# 1. 설치 (Linux에서는 Yazi를 먼저 설치해야 함)
 herdr plugin install speardragon/herdr-yazi
 ```
 
@@ -92,7 +92,7 @@ HERDR_PLUGIN_CONTEXT_JSON='{"focused_pane_cwd":"/some/dir"}' bin/resolve-dir.sh
 
 ## 요구 사항
 
-macOS + [Homebrew](https://brew.sh/).
+macOS + [Homebrew](https://brew.sh/), 또는 Yazi가 설치된 Linux.
 
 ---
 

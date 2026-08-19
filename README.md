@@ -1,7 +1,7 @@
 # herdr-yazi
 
 ![herdr 0.7+](https://img.shields.io/badge/herdr-0.7%2B-8a2be2)
-![platform: macOS](https://img.shields.io/badge/platform-macOS-informational)
+![platform: macOS | Linux](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-informational)
 ![zero JS dependencies](https://img.shields.io/badge/deps-zero-brightgreen)
 
 ![herdr-yazi open in a split pane beside Claude Code, showing the Yazi file explorer on the right](assets/hero.jpeg)
@@ -14,12 +14,12 @@
 
 - **Never leave your herdr session.** Browse and preview files without switching to VSCode.
 - **No reimplementation.** Tree navigation, previews, file operations — all real Yazi. If a feature is missing, update Yazi itself.
-- **Install and go.** The plugin's `[[build]]` step installs Yazi via Homebrew if it's missing.
+- **Install and go.** On macOS, the plugin's `[[build]]` step installs Yazi via Homebrew if it's missing. On Linux, Yazi must already be installed.
 - **Opens where you actually are.** The directory of the pane/workspace that triggered the key is read from herdr's context and passed via `--cwd`, so Yazi always opens in the folder you were just working in.
 
 ## What it does
 
-- `[[build]]`: checks `command -v yazi`, runs `brew install yazi` if missing.
+- `[[build]]`: checks `command -v yazi`; on macOS, it runs `brew install yazi` if missing. On Linux, it exits with installation guidance.
 - `[[actions]] open`: reads the triggering pane/workspace's directory from `$HERDR_PLUGIN_CONTEXT_JSON` and opens a split pane via `herdr plugin pane open --placement split --cwd`.
 - `[[actions]] open-tab`: same, but with `--placement tab` to open in a new tab instead.
 - `[[panes]] explorer`: `exec yazi` inside that pane. That's the whole plugin.
@@ -29,7 +29,7 @@ Directory resolution order: `$HERDR_EXPLORER_DIR` → `HERDR_PLUGIN_CONTEXT_JSON
 ## Quick start
 
 ```bash
-# 1. Install (auto-installs Yazi via Homebrew if missing)
+# 1. Install (install Yazi first on Linux)
 herdr plugin install speardragon/herdr-yazi
 ```
 
@@ -92,7 +92,7 @@ HERDR_PLUGIN_CONTEXT_JSON='{"focused_pane_cwd":"/some/dir"}' bin/resolve-dir.sh
 
 ## Requirements
 
-macOS + [Homebrew](https://brew.sh/).
+macOS + [Homebrew](https://brew.sh/), or Linux with Yazi installed.
 
 ---
 
